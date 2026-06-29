@@ -1,29 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amoura-d <amoura-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/25 16:23:05 by amoura-d          #+#    #+#             */
-/*   Updated: 2026/06/29 10:27:39 by amoura-d         ###   ########.fr       */
+/*   Created: 2026/06/29 10:24:57 by amoura-d          #+#    #+#             */
+/*   Updated: 2026/06/29 10:25:07 by amoura-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "get_next_line.h"
+#include <fcntl.h>
+#include <stdio.h>
 
-# include <unistd.h>
-# include <stdlib.h>
+int	main(void)
+{
+	int		fd;
+	char	*line;
+	int		i;
 
-# define BUFFER_SIZE 42
-
-char	*get_next_line(int fd);
-char	*read_and_accumulate(int fd, char *static_buffer);
-char	*extract_line(char *static_buffer);
-char	*update_storage(char *static_buffer);
-size_t	ft_strlen(const char *s);
-char	*ft_strchr(const char *s, int c);
-char	*ft_strjoin(char *s1, char *s2);
-
-#endif
+	i = 1;
+	fd = open("teste.txt", O_RDONLY);
+	if (fd == -1)
+	{
+		printf("Erro ao abrir o arquivo\n");
+		return (1);
+	}
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		printf("Linha %d: %s", i, line);
+		free(line);
+		i++;
+	}
+	close(fd);
+	return (0);
+}
