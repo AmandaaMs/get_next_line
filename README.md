@@ -11,11 +11,13 @@ This project involves implementing a C function that reads an entire line from a
 📌 Project Overview
 The `get_next_line` function must return the line read from a file. When called in a loop, it allows reading the entire text, line by line, until the end of the file (EOF).
 
+### Supported Conversions
+
 | Functionality | Mandatory | Bonus	|
 | :---: | :--- | :---: | :---: |
 | File Descriptors | 1 at a time | Multiple simultaneously	|
 | Static Variables | 1 simple | Array of variables (storage[FD_MAX]) |
-| Compiled Files | get_next_line.c | get_next_line_bonus. |
+| Compiled Files   | get_next_line.c | get_next_line_bonus. |
 ---
 ## Instructions
 
