@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amoura-d <amoura-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/25 16:23:13 by amoura-d          #+#    #+#             */
-/*   Updated: 2026/07/01 08:17:53 by amoura-d         ###   ########.fr       */
+/*   Updated: 2026/07/01 08:41:32 by amoura-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*read_and_accumulate(int fd, char *static_buffer);
 char	*extract_line(char *static_buffer);
@@ -18,14 +18,16 @@ char	*update_storage(char *static_buffer);
 
 char	*get_next_line(int fd)
 {
-	static char	*storage;
+	static char	*storage[FD_MAX];
 	char		*line;
 
-	storage = read_and_accumulate(fd, storage);
-	if (!storage)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= FD_MAX)
 		return (NULL);
-	line = extract_line(storage);
-	storage = update_storage(storage);
+	storage[fd] = read_and_accumulate(fd, storage[fd]);
+	if (!storage[fd])
+		return (NULL);
+	line = extract_line(storage[fd]);
+	storage[fd] = update_storage(storage[fd]);
 	return (line);
 }
 
@@ -34,8 +36,6 @@ char	*read_and_accumulate(int fd, char *static_buffer)
 	char	*buffer;
 	int		count;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (NULL);
