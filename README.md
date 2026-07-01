@@ -81,6 +81,7 @@ cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 get_next_line.c get_next_line_utils.c
 
 ## Checking for memory leaks
 valgrind --leak-check=full ./gnl_test
+
 ---
 
 ## 🚀 How to use and test (Bonus Part)
@@ -166,6 +167,7 @@ cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 get_next_line.c get_next_line_utils.c
 
 ## Checking for memory leaks
 valgrind --leak-check=full ./gnl_test
+
 ---
 
 ## Resources
@@ -199,6 +201,7 @@ All implementations, testing, debugging, and final validation were completed man
 
 * Norminette
 * gnlTester - by Tripouille (git@github.com:Tripouille/gnlTester.git)
+
 ---
 
 ## Author
